@@ -11,6 +11,7 @@ import json
 
 # Settings
 DATA_FILE = 'data.json'
+MAX_SKILLS_LEN = 70
 
 # Load data
 with open(DATA_FILE, 'r') as json_file:
@@ -63,7 +64,54 @@ out += "%Professional Overview\n"
 out += "\\begin{rSection2}{Professional Overview}\n"
 for i in data['professional_overview']:
     out += f"\t\\item {i}\n"
-out += "\\end{rSection2}\n\n\n"
+out += "\\end{rSection2}\n\n"
+
+
+# Technical Strengths Section
+out += """
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\\begin{rSection}{Technical Skills}
+    \\begin{tabular}{ @{} >{\\bfseries}l @{\\hspace{6ex}} l }
+"""
+
+## Solution Stack
+line, fl = str(), True
+for i in data['technical_skills']['solution_stack']:
+    if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
+        line = line + i + ', '
+    elif fl:
+        out += ('\t\tSolution Stack & ' + line + '\\\\\n')
+        line, fl = '& ' +  i + ', ', False
+    else:
+        out += ('\t\t' + line + '\\\\\n')
+        line = '& ' + i + ', '
+out += ('\t\t' + line[:-2] + '\\\\\n')
+
+# Software/Tools
+line, fl = str(), True
+for i in data['technical_skills']['software_tools']:
+    if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
+        line = line + i + ', '
+    elif fl:
+        out += ('\t\tSoftware/Tools & ' + line + '\\\\\n')
+        line, fl = '& ' +  i + ', ', False
+    else:
+        out += ('\t\t' + line + '\\\\\n')
+        line = '& ' + i + ', '
+out += ('\t\t' + line[:-2] + '\\\\\n')
+
+
+out += """\t\\end{tabular}
+\\end{rSection}
+
+
+"""
+
+
+
 out += "\\end{document}"
 
 # Write output to file
