@@ -17,6 +17,7 @@ with open(DATA_FILE, 'r') as json_file:
     data = json.load(json_file)
 
 
+#
 out = f"""
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
@@ -53,7 +54,18 @@ for i, v in enumerate(data['contact_info']):
     else:
         out += f"\t\\raisebox{{-0.0\\height}} {v}\n"
 
-out += "}"
+out += "}\n\n\n"
 
+out += "\\begin{document}\n\n\n"
+
+# Profesional Overivew
+out += "%Professional Overview\n"
+out += "\\begin{rSection2}{Professional Overview}\n"
+for i in data['professional_overview']:
+    out += f"\t\\item {i}\n"
+out += "\\end{rSection2}\n\n\n"
+out += "\\end{document}"
+
+# Write output to file
 with open('output/raw_tex/resume.tex', 'w') as outfile:
     outfile.write(out)
