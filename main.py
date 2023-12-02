@@ -74,7 +74,7 @@ out += """
 %----------------------------------------------------------------------------------------
 
 \\begin{rSection}{Technical Skills}
-    \\begin{tabular}{ @{} >{\\bfseries}l @{\\hspace{6ex}} l }
+    \\begin{tabular}{ @{} >{\\bfseries}l @{\\hspace{6ex}} l }z
 """
 
 ## Solution Stack
@@ -109,6 +109,25 @@ out += """\t\\end{tabular}
 
 
 """
+
+out += """
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\\begin{rSection}{Education}
+
+"""
+
+for item in data['education']:
+    out += f"\t\\begin{{rEducation}}{{{item['institution']}}}{{{item['location']}}}{{{item['time']}}}{{{item['degree']}}}{{}}\n"
+    points = item.get('points', [])
+    if len(points) > 0:
+        for point in points:
+            out += f"\t\t\\item {point}\n"
+    out += '\t\\end{rEducation}\n\n'
+
+out += "\\end{rSection}\n\n"
 
 
 
