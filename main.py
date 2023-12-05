@@ -126,9 +126,24 @@ for item in data['education']:
         for point in points:
             out += f"\t\t\\item {point}\n"
     out += '\t\\end{rEducation}\n\n'
-
 out += "\\end{rSection}\n\n"
 
+
+out += """
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\\begin{rSection}{Experience}
+
+"""
+
+for item in data['experience']:
+    out += f"\t\\begin{{rSubsection}}{{{item['company']}}}{{{item['location']}}}{{{item['time']}}}{{{item['title']}}}{{}}\n"
+    for point in item['points']:
+        out += f"\t\t\\item {point}\n"
+    out += '\t\\end{rSubsection}\n\n'
+out += "\\end{rSection}\n\n"
 
 
 out += "\\end{document}"
