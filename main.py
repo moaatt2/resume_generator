@@ -7,6 +7,7 @@
 ######################################################################
 
 # Imports
+import os
 import json
 
 # Settings
@@ -151,3 +152,9 @@ out += "\\end{document}"
 # Write output to file
 with open('output/raw_tex/resume.tex', 'w') as outfile:
     outfile.write(out)
+
+# Compile latex file into appropriate folder
+os.system("pdflatex -output-directory output\\compiled_results output\\raw_tex\\resume.tex")
+
+# Remove logfile
+os.remove('output\\compiled_results\\resume.log')
