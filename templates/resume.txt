@@ -33,3 +33,17 @@
 
 % Name Goes Here
 \name{{ "{" }}{{name}}{{ "}" }}
+
+% Contact Stuff Goes Here
+\address{{ "{" }}
+    {% for item in contact_info %}
+        {% if loop.index == 1 %}
+    \raisebox{{ "{" }}-0.0\height{{ "}" }} {{ item }}
+        {% else %}
+    $\cdot$ \raisebox{{ "{" }}-0.0\height{{ "}" }} {{ item }}
+        {% endif %}
+    {% endfor %}
+{{ "}" }}
+
+\begin{{ "{" }}document{{ "}" }}
+\end{{ "{" }}document{{ "}" }}
