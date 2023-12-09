@@ -12,7 +12,7 @@ MAX_SKILLS_LEN = 70
 with open(DATA_FILE, 'r') as json_file:
     data = json.load(json_file)
 
-environment = Environment(loader=FileSystemLoader('templates/'))
+environment = Environment(loader=FileSystemLoader('templates/'), trim_blocks=True, lstrip_blocks=True)
 template = environment.get_template('resume.txt')
 
 content = template.render(
