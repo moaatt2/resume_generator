@@ -46,4 +46,12 @@
 {{ "}" }}
 
 \begin{{ "{" }}document{{ "}" }}
+
+% Professional Overview
+\begin{{ "{" }}rSection2{{ "}" }}{{ "{" }}Professional Overview{{ "}" }}
+    {% for item in professional_overview %}
+        \item {{ item }}
+    {% endfor %}
+\end{{ "{" }}rSection2{{ "}" }}
+
 \end{{ "{" }}document{{ "}" }}
