@@ -12,11 +12,38 @@ MAX_SKILLS_LEN = 70
 with open(DATA_FILE, 'r') as json_file:
     data = json.load(json_file)
 
+
+# Format Solution Stack
+stack_lines = list()
+line = ''
+for i in data['technical_skills']['solution_stack']:
+    if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
+        line = line + i + ', '
+    else:
+        stack_lines.append(line)
+        line = i + ', '
+stack_lines.append(line)
+
+
+# Format Software/Tools
+software_lines = list()
+line = ''
+for i in data['technical_skills']['software_tools']:
+    if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
+        line = line + i + ', '
+    else:
+        software_lines.append(line)
+        line = i + ', '
+software_lines.append(line)
+
+
+# Fill out jinja template
 environment = Environment(loader=FileSystemLoader('templates/'), trim_blocks=True, lstrip_blocks=True)
 template = environment.get_template('resume.txt')
-
 content = template.render(
-    data
+    data,
+    stack_lines=stack_lines,
+    software_lines=software_lines,
 )
 
 print(content)

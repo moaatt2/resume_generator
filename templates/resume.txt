@@ -54,4 +54,29 @@
     {% endfor %}
 \end{{ "{" }}rSection2{{ "}" }}
 
+
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Technical Skills{{ "}" }}
+    \begin{{ "{" }}tabular{{ "}" }}{{ "{" }} @ {{ "{" }}{{ "}" }} > {{ "{" }}\bfseries{{ "}" }}l @{{ "{" }}\hspace{{ "{" }}6ex{{ "}" }}{{ "}" }} l {{ "}" }}
+        {% for line in stack_lines %}
+            {% if loop.index == 1 %}
+        Solution Stack & {{ line }} \\
+            {% else %}
+        & {{ line }} \\
+            {% endif %}
+        {% endfor %}
+        {% for line in software_lines %}
+            {% if loop.index == 1 %}
+        Software/Tools & {{ line }} \\
+            {% else %}
+        & {{ line }} \\
+            {% endif %}
+        {% endfor %}
+    \end{{ "{" }}tabular{{ "}" }}
+\end{{ "{" }}rSection{{ "}" }}
+
+
 \end{{ "{" }}document{{ "}" }}
