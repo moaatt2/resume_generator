@@ -78,5 +78,20 @@
     \end{{ "{" }}tabular{{ "}" }}
 \end{{ "{" }}rSection{{ "}" }}
 
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Education{{ "}" }}
+    {% for item in education %}
+
+    \begin{{ "{" }}rEducation{{ "}" }}{{ "{" }}{{ item["institution"] }}{{ "}" }}{{ "{" }}{{ item["location"] }}{{ "}" }}{{ "{" }}{{ item["time"] }}{{ "}" }}{{ "{" }}{{ item["degree"] }}{{ "}{}" }}
+        {% for point in item["points"] %}
+        \item {{ point }}
+        {% endfor %}
+    \end{{ "{" }}rEducation{{ "}" }}
+    
+    {% endfor %}
+\end{{ "{" }}rSection{{ "}" }}
 
 \end{{ "{" }}document{{ "}" }}
