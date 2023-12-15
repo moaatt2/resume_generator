@@ -94,4 +94,21 @@
     {% endfor %}
 \end{{ "{" }}rSection{{ "}" }}
 
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Experience{{ "}" }}
+    {% for item in experience %}
+
+    \begin{{ "{" }}rSubsection{{ "}" }}{{ "{" }}{{ item["company"] }}{{ "}" }}{{ "{" }}{{ item["location"] }}{{ "}" }}{{ "{" }}{{ item["time"] }}{{ "}" }}{{ "{" }}{{ item["title"] }}{{ "}{}" }}
+        {% for point in item["points"] %}
+        \item {{ point }}
+        {% endfor %}
+    \end{{ "{" }}rSubsection{{ "}" }}
+    
+    {% endfor %}
+\end{{ "{" }}rSection{{ "}" }}
+
+
 \end{{ "{" }}document{{ "}" }}
