@@ -46,4 +46,6 @@ content = template.render(
     software_lines=software_lines,
 )
 
-print(content)
+# Write output to file
+with open('output/raw_tex/resume.tex', 'w') as outfile:
+    outfile.write(content)
