@@ -52,3 +52,6 @@ with open('output/raw_tex/resume.tex', 'w') as outfile:
 
 # Compile latex file into appropriate folder
 os.system("pdflatex -output-directory output\\compiled_results output\\raw_tex\\resume.tex")
+
+# Remove logfile
+os.remove('output\\compiled_results\\resume.log')
