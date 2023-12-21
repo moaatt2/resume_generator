@@ -1,0 +1,114 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Copying and distribution of this file, with or without modification,
+% are permitted in any medium without royalty provided the copyright
+% notice and this notice are preserved.  This file is offered as-is,
+% without any warranty.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+{% raw -%}
+\documentclass{resume}
+% Use the custom resume.cls style
+
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage{scalerel}
+
+\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+
+\usepackage{color,hyperref}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.3}
+\hypersetup{colorlinks,breaklinks,
+            linkcolor=darkblue,urlcolor=darkblue,
+            anchorcolor=darkblue,citecolor=darkblue}
+
+{%- endraw %}
+
+% Name Goes Here
+\name{{ "{" }}{{name}}{{ "}" }}
+
+% Contact Stuff Goes Here
+\address{{ "{" }}
+    {% for item in contact_info %}
+        {% if loop.index == 1 %}
+    \raisebox{{ "{" }}-0.0\height{{ "}" }} {{ item }}
+        {% else %}
+    $\cdot$ \raisebox{{ "{" }}-0.0\height{{ "}" }} {{ item }}
+        {% endif %}
+    {% endfor %}
+{{ "}" }}
+
+\begin{{ "{" }}document{{ "}" }}
+
+% Professional Overview
+\begin{{ "{" }}rSection2{{ "}" }}{{ "{" }}Professional Overview{{ "}" }}
+    {% for item in professional_overview %}
+        \item {{ item }}
+    {% endfor %}
+\end{{ "{" }}rSection2{{ "}" }}
+
+
+%----------------------------------------------------------------------------------------
+%	TECHNICAL STRENGTHS SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Technical Skills{{ "}" }}
+    \begin{{ "{" }}tabular{{ "}" }}{{ "{" }} @ {{ "{" }}{{ "}" }} > {{ "{" }}\bfseries{{ "}" }}l @{{ "{" }}\hspace{{ "{" }}6ex{{ "}" }}{{ "}" }} l {{ "}" }}
+        {% for line in stack_lines %}
+            {% if loop.index == 1 %}
+        Solution Stack & {{ line }} \\
+            {% else %}
+        & {{ line }} \\
+            {% endif %}
+        {% endfor %}
+        {% for line in software_lines %}
+            {% if loop.index == 1 %}
+        Software/Tools & {{ line }} \\
+            {% else %}
+        & {{ line }} \\
+            {% endif %}
+        {% endfor %}
+    \end{{ "{" }}tabular{{ "}" }}
+\end{{ "{" }}rSection{{ "}" }}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Education{{ "}" }}
+    {% for item in education %}
+
+    \begin{{ "{" }}rEducation{{ "}" }}{{ "{" }}{{ item["institution"] }}{{ "}" }}{{ "{" }}{{ item["location"] }}{{ "}" }}{{ "{" }}{{ item["time"] }}{{ "}" }}{{ "{" }}{{ item["degree"] }}{{ "}{}" }}
+        {% for point in item["points"] %}
+        \item {{ point }}
+        {% endfor %}
+    \end{{ "{" }}rEducation{{ "}" }}
+    
+    {% endfor %}
+\end{{ "{" }}rSection{{ "}" }}
+
+%----------------------------------------------------------------------------------------
+%	WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{{ "{" }}rSection{{ "}" }}{{ "{" }}Experience{{ "}" }}
+    {% for item in experience %}
+
+    \begin{{ "{" }}rSubsection{{ "}" }}{{ "{" }}{{ item["company"] }}{{ "}" }}{{ "{" }}{{ item["location"] }}{{ "}" }}{{ "{" }}{{ item["time"] }}{{ "}" }}{{ "{" }}{{ item["title"] }}{{ "}{}" }}
+        {% for point in item["points"] %}
+        \item {{ point }}
+        {% endfor %}
+    \end{{ "{" }}rSubsection{{ "}" }}
+    
+    {% endfor %}
+\end{{ "{" }}rSection{{ "}" }}
+
+
+\end{{ "{" }}document{{ "}" }}

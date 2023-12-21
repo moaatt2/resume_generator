@@ -1,14 +1,8 @@
 
-######################################################################
-# Copying and distribution of this file, with or without modification,
-# are permitted in any medium without royalty provided the copyright
-# notice and this notice are preserved.  This file is offered as-is,
-# without any warranty.
-######################################################################
-
 # Imports
 import os
 import json
+from jinja2 import Environment, FileSystemLoader
 
 # Settings
 DATA_FILE = 'data.json'
@@ -19,139 +13,42 @@ with open(DATA_FILE, 'r') as json_file:
     data = json.load(json_file)
 
 
-#
-out = f"""
-%----------------------------------------------------------------------------------------
-%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
-
-\\documentclass{{resume}}
-% Use the custom resume.cls style
-
-\\usepackage{{fontawesome5}}
-\\usepackage{{amsmath}}
-\\usepackage{{tabularx}}
-\\usepackage{{scalerel}}
-
-\\usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{{geometry}} % Document margins
-\\newcommand{{\\tab}}[1]{{\\hspace{{.2667\\textwidth}}\\rlap{{#1}}}}
-\\newcommand{{\\itab}}[1]{{\\hspace{{0em}}\\rlap{{#1}}}}
-
-\\usepackage{{color,hyperref}}
-\\definecolor{{darkblue}}{{rgb}}{{0.0,0.0,0.3}}
-\\hypersetup{{colorlinks,breaklinks,
-            linkcolor=darkblue,urlcolor=darkblue,
-            anchorcolor=darkblue,citecolor=darkblue}}
-
-% Name Goes Here
-\\name{{{data['name']}}}
-
-% Contact Stuff Goes Here
-\\address {{
-"""
-
-for i, v in enumerate(data['contact_info']):
-    if i != 0:
-        out += f"\t$\\cdot$ \\raisebox{{-0.0\\height}} {v}\n"
-    else:
-        out += f"\t\\raisebox{{-0.0\\height}} {v}\n"
-
-out += "}\n\n\n"
-
-out += "\\begin{document}\n\n\n"
-
-# Profesional Overivew
-out += "%Professional Overview\n"
-out += "\\begin{rSection2}{Professional Overview}\n"
-for i in data['professional_overview']:
-    out += f"\t\\item {i}\n"
-out += "\\end{rSection2}\n\n"
-
-
-# Technical Strengths Section
-out += """
-%----------------------------------------------------------------------------------------
-%	TECHNICAL STRENGTHS SECTION
-%----------------------------------------------------------------------------------------
-
-\\begin{rSection}{Technical Skills}
-    \\begin{tabular}{ @{} >{\\bfseries}l @{\\hspace{6ex}} l }z
-"""
-
-## Solution Stack
-line, fl = str(), True
+# Format Solution Stack
+stack_lines = list()
+line = ''
 for i in data['technical_skills']['solution_stack']:
     if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
         line = line + i + ', '
-    elif fl:
-        out += ('\t\tSolution Stack & ' + line + '\\\\\n')
-        line, fl = '& ' +  i + ', ', False
     else:
-        out += ('\t\t' + line + '\\\\\n')
-        line = '& ' + i + ', '
-out += ('\t\t' + line[:-2] + '\\\\\n')
+        stack_lines.append(line)
+        line = i + ', '
+stack_lines.append(line)
 
-# Software/Tools
-line, fl = str(), True
+
+# Format Software/Tools
+software_lines = list()
+line = ''
 for i in data['technical_skills']['software_tools']:
     if len(line) + len(i) + 2 <= MAX_SKILLS_LEN:
         line = line + i + ', '
-    elif fl:
-        out += ('\t\tSoftware/Tools & ' + line + '\\\\\n')
-        line, fl = '& ' +  i + ', ', False
     else:
-        out += ('\t\t' + line + '\\\\\n')
-        line = '& ' + i + ', '
-out += ('\t\t' + line[:-2] + '\\\\\n')
+        software_lines.append(line)
+        line = i + ', '
+software_lines.append(line)
 
 
-out += """\t\\end{tabular}
-\\end{rSection}
-
-
-"""
-
-out += """
-%----------------------------------------------------------------------------------------
-%	EDUCATION SECTION
-%----------------------------------------------------------------------------------------
-
-\\begin{rSection}{Education}
-
-"""
-
-for item in data['education']:
-    out += f"\t\\begin{{rEducation}}{{{item['institution']}}}{{{item['location']}}}{{{item['time']}}}{{{item['degree']}}}{{}}\n"
-    points = item.get('points', [])
-    if len(points) > 0:
-        for point in points:
-            out += f"\t\t\\item {point}\n"
-    out += '\t\\end{rEducation}\n\n'
-out += "\\end{rSection}\n\n"
-
-
-out += """
-%----------------------------------------------------------------------------------------
-%	WORK EXPERIENCE SECTION
-%----------------------------------------------------------------------------------------
-
-\\begin{rSection}{Experience}
-
-"""
-
-for item in data['experience']:
-    out += f"\t\\begin{{rSubsection}}{{{item['company']}}}{{{item['location']}}}{{{item['time']}}}{{{item['title']}}}{{}}\n"
-    for point in item['points']:
-        out += f"\t\t\\item {point}\n"
-    out += '\t\\end{rSubsection}\n\n'
-out += "\\end{rSection}\n\n"
-
-
-out += "\\end{document}"
+# Fill out jinja template
+environment = Environment(loader=FileSystemLoader('templates/'), trim_blocks=True, lstrip_blocks=True)
+template = environment.get_template('resume.txt')
+content = template.render(
+    data,
+    stack_lines=stack_lines,
+    software_lines=software_lines,
+)
 
 # Write output to file
 with open('output/raw_tex/resume.tex', 'w') as outfile:
-    outfile.write(out)
+    outfile.write(content)
 
 # Compile latex file into appropriate folder
 os.system("pdflatex -output-directory output\\compiled_results output\\raw_tex\\resume.tex")
