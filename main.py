@@ -6,7 +6,7 @@ from typing import List
 from jinja2 import Environment, FileSystemLoader
 
 # Settings
-DATA_FILE = 'data.json'
+DATA_FILE = 'data_versions.json'
 MAX_SKILLS_LEN = 70
 
 # Load data
@@ -53,3 +53,18 @@ if 'versions' not in data:
 
     # Remove logfile
     os.remove('output\\compiled_results\\resume.log')
+
+# Handle Case Where Versions are Defined
+else:
+    for version in data.get("versions", list()):
+        vdata = dict()
+
+        # Set Name
+        vdata['name'] = data['name']
+
+        # Get Contact Info
+        contact_info = list()
+        for i in data['contact_info']:
+            if version in i['versions']:
+                contact_info.append(i['data'])
+        vdata['contact_info'] = contact_info
