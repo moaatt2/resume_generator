@@ -1,4 +1,5 @@
 data.json
+data_versions.json
 _.md
 output/*
 .venv
