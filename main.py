@@ -68,3 +68,10 @@ else:
             if version in i['versions']:
                 contact_info.append(i['data'])
         vdata['contact_info'] = contact_info
+
+        # Get Professional Overview Points
+        prof_overview = list()
+        for i in data['professional_overview']:
+            if version in i['versions']:
+                prof_overview.append(i['data'])
+        vdata['professional_overview'] = prof_overview
