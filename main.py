@@ -59,7 +59,7 @@ else:
     for version in data.get("versions", list()):
         vdata = dict()
 
-        # Set Name
+        # Set Nam
         vdata['name'] = data['name']
 
         # Get Contact Info
@@ -75,3 +75,17 @@ else:
             if version in i['versions']:
                 prof_overview.append(i['data'])
         vdata['professional_overview'] = prof_overview
+
+        # Format Solution Stack Lines
+        stack_items = list()
+        for i in data['technical_skills']['solution_stack']:
+            if version in i['versions']:
+                stack_items.append(i['data'])
+        stack_lines = create_skill_lines(stack_items)
+
+        # Format Software Tools Lines
+        software_items = list()
+        for i in data['technical_skills']['software_tools']:
+            if version in i['versions']:
+                software_items.append(i['data'])
+        software_lines = create_skill_lines(software_items)
