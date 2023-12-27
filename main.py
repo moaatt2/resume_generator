@@ -89,3 +89,19 @@ else:
             if version in i['versions']:
                 software_items.append(i['data'])
         software_lines = create_skill_lines(software_items)
+
+        # Handle Education
+        vdata["education"] = list()
+        for i in data["education"]:
+            if version in i['versions']:
+                points = list()
+                for p in i['points']:
+                    if version in p['versions']:
+                        points.append(p['data'])
+                vdata["education"].append({
+                    "institution": i["institution"],
+                    "location":    i["location"],
+                    "degree":      i["degree"],
+                    "time":        i["time"],
+                    "points":      points,
+                })
