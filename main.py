@@ -105,3 +105,19 @@ else:
                     "time":        i["time"],
                     "points":      points,
                 })
+
+        # Handle Experience
+        vdata["experience"] = list()
+        for i in data["experience"]:
+            if version in i['versions']:
+                points = list()
+                for p in i['points']:
+                    if version in p['versions']:
+                        points.append(p['data'])
+                vdata["experience"].append({
+                    "company":  i["company"],
+                    "location": i["location"],
+                    "title":    i["title"],
+                    "time":        i["time"],
+                    "points":      points,
+                })
