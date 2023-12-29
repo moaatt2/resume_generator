@@ -121,3 +121,13 @@ else:
                     "time":        i["time"],
                     "points":      points,
                 })
+
+        # Fill out jinja template
+        environment = Environment(loader=FileSystemLoader('templates/'), trim_blocks=True, lstrip_blocks=True)
+        template = environment.get_template('resume.txt')
+        content = template.render(
+            vdata,
+            stack_lines=stack_lines,
+            software_lines=software_lines,
+        )
+
