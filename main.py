@@ -131,3 +131,7 @@ else:
             software_lines=software_lines,
         )
 
+        # Save Compiled tex to file
+        with open(f"output/raw_tex/{version}.tex", "w") as outfile:
+            outfile.write(content)
+
