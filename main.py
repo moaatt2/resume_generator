@@ -135,3 +135,6 @@ else:
         with open(f"output/raw_tex/{version}.tex", "w") as outfile:
             outfile.write(content)
 
+        # Compile latex file into appropriate folder
+        os.system(f"pdflatex -output-directory output\\compiled_results output\\raw_tex\\{version}.tex")
+
