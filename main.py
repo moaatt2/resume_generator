@@ -138,3 +138,5 @@ else:
         # Compile latex file into appropriate folder
         os.system(f"pdflatex -output-directory output\\compiled_results output\\raw_tex\\{version}.tex")
 
+        # Remove logfile
+        os.remove(f'output\\compiled_results\\{version}.log')
