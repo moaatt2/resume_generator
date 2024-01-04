@@ -2,17 +2,27 @@
 # Imports
 import os
 import json
+import yaml
+import pathlib
 from typing import List
 from jinja2 import Environment, FileSystemLoader
 
 # Settings
-DATA_FILE = 'data_versions.json'
+DATA_FILE = 'data_versions.yml'
 MAX_SKILLS_LEN = 70
 
-# Load data
-with open(DATA_FILE, 'r') as json_file:
-    data = json.load(json_file)
+# Load Data
+extension = pathlib.Path(DATA_FILE).suffix.lower()
+if extension == '.json':
+    with open(DATA_FILE, 'r') as json_file:
+        data = json.load(json_file)
 
+elif extension in [".yml", ".yaml"]:
+    with open(DATA_FILE, "r") as stream:
+        data = yaml.safe_load(stream)
+
+else:
+    print('Unsupported Data File')
 
 # Write a helper function to format skills into lines
 def create_skill_lines(skills: List[str]) -> List[str]:
