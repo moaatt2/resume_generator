@@ -22,10 +22,72 @@ To use this tools follow the steps below:
 
 ## Data File Formats
 
+A single `YAML` or `JSON` data file can represent either a single resume or multiple resuemes depending on the format. Please consult the appropriate reference to determine the correct format for your file.
+
 ### Single Version
 
-#TODO
+The YAML spec is:
 
+```YAML
+name: John Doe # The name that you want at the top of the resume
+contact_info: # A list of contact info latex snippets to go under the name
+    - 
+professional_overview: # A list of short snippets going under the contact info
+    - 
+technical_skills:
+    solution_stack: # A list of technical tools you are familiar with
+        -
+    software_tools: # A list of software/tools you are familar with
+        -
+education: # A list of education items like the one below
+  - institution: Smallville College # The institution that granted the degree
+    location: Smallville # Where the institution is located
+    degree: Bachelors # What degree you got
+    time: 2023 # When you got your degree
+    points: # A list of points you would like to note about your education
+        -
+experience: # A list of job items like the one below
+  - company: Corp Corp # The company you worked for
+    location: Smallville # Where your job was located
+    title: Worker # Your job title
+    time: 2023-present # When you had the job
+    points: # A list of points about the job
+      - 
+```
+
+The JSON spec is:
+
+```JSON
+{
+    "name": "The name that you want at the top of the resume", 
+    "contact_info": ["A list of contact info latex snippets to go under the name"],
+    "professional_overview": ["A list of short snippets going under the contact info"],
+    "technical_skills": {
+        "solution_stack": ["A list of technical tools you are familiar with"],
+        "software_tools": ["A list of software/tools you are familar with"]
+    },
+    "education": [
+        "A list of education items like the one below",
+        {
+            "institution": "The institution that granted the degree",
+            "location": "Where the institution is located",
+            "degree": "What degree you got",
+            "time": "When you got your degree",
+            "points": ["A list of points you would like to note about your education"]
+        }
+    ],
+    "experience": [
+        "A list of job items like the one below",
+        {
+            "company": "The company you worked for",
+            "location": "Where your job was located",
+            "title": "Your job title",
+            "time": "When you had the job",
+            "points": ["# A list of points about the job"]
+        }
+    ]
+}
+```
 
 ### Multi Version
 
