@@ -91,4 +91,53 @@ The JSON spec is:
 
 ### Multi Version
 
+The YAML spec is:
+
+```YAML
+name: # The name that you want at the top of the resume
+versions: # A list of the resume versions represented in this file
+    -
+contact_info: # A list of contact info latex snippets like the one below that gounder the name
+    - data: # The contact info item you want included in at least one version
+      versions: # A list of the versions this contact info should be included in
+        - 
+professional_overview: # A list of short overview snippets formatted like the one below going under the contact info
+    - data: # The professional overview line item
+      versions: # A list of the versions this point should be included in
+        -
+technical_skills:
+    solution_stack: # A list of technical tools like the one below you are familiar
+        - data: # The technical tool you are familiar with
+          versions: # A list of the versions this tool should be included in
+            -
+    software_tools: # A list of software/tools like the one below you are familar with
+        - data: # The software/tool you are familar with
+          versions: # A list of the versions this software/tool should be included in
+            -
+education: # A list of education items like the one below
+  - institution: Smallville College # The institution that granted the degree
+    location: Smallville # Where the institution is located
+    degree: Bachelors # What degree you got
+    time: 2023 # When you got your degree
+    points:  # A list of points like the one below you would like to note about this degree
+      - data: # The point about the degree you would like included in some versions
+        versions: # A list of the versions this point should be included in
+          - 
+    versions: # A list of the versions this point should be included in
+      - 
+experience:  # A list of job items like the one below
+  - company: Corp Corp # The company you worked for
+    location: Smallville # Where your job was located
+    title: Smallville # Where your job was located
+    time: 2023-present # When you had the job
+    points: # A list of points about the job
+      - data:  # The point about the job you would like included in some versions
+        versions:  # A list of the versions this point should be included in
+          - 
+    versions: # A list of the versions this job should be included in
+      - 
+```
+
+The JSON spec is:
+
 #TODO
