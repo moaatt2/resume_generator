@@ -11,8 +11,8 @@ The base resume template is based on Trey Hunner's LaTeX resume template(found [
 
 ## How To Use This Tool
 
-To use this tools follow the steps below:
-1. Install the python requirements in the requirements file.
+To use this tool follow the steps below:
+1. Install the Python requirements in the requirements file.
 2. Ensure that you have latex installed and can run the `pdflatex` command in your console.
 3. Create a data file following one of the formats laid out below.
 4. Update line 11 of `main.py` with the name of the file.
@@ -22,7 +22,7 @@ To use this tools follow the steps below:
 
 ## Data File Formats
 
-A single `YAML` or `JSON` data file can represent either a single resume or multiple resuemes depending on the format. Please consult the appropriate reference to determine the correct format for your file.
+A single `YAML` or `JSON` data file can represent either a single resume or multiple resumes depending on the format. Please consult the appropriate reference to determine the correct format for your file.
 
 ### Single Version
 
@@ -37,7 +37,7 @@ professional_overview: # A list of short snippets going under the contact info
 technical_skills:
     solution_stack: # A list of technical tools you are familiar with
         -
-    software_tools: # A list of software/tools you are familar with
+    software_tools: # A list of software/tools you are familiar with
         -
 education: # A list of education items like the one below
   - institution: Smallville College # The institution that granted the degree
@@ -64,7 +64,7 @@ The JSON spec is:
     "professional_overview": ["A list of short snippets going under the contact info"],
     "technical_skills": {
         "solution_stack": ["A list of technical tools you are familiar with"],
-        "software_tools": ["A list of software/tools you are familar with"]
+        "software_tools": ["A list of software/tools you are familiar with"]
     },
     "education": [
         "A list of education items like the one below",
@@ -97,8 +97,8 @@ The YAML spec is:
 name: # The name that you want at the top of the resume
 versions: # A list of the resume versions represented in this file
     -
-contact_info: # A list of contact info latex snippets like the one below that gounder the name
-    - data: # The contact info item you want included in at least one version
+contact_info: # A list of contact info latex snippets like the one below that go under the name
+    - data: # The contact info item you want to be included in at least one version
       versions: # A list of the versions this contact info should be included in
         - 
 professional_overview: # A list of short overview snippets formatted like the one below going under the contact info
@@ -110,8 +110,8 @@ technical_skills:
         - data: # The technical tool you are familiar with
           versions: # A list of the versions this tool should be included in
             -
-    software_tools: # A list of software/tools like the one below you are familar with
-        - data: # The software/tool you are familar with
+    software_tools: # A list of software/tools like the one below you are familiar with
+        - data: # The software/tool you are familiar with
           versions: # A list of the versions this software/tool should be included in
             -
 education: # A list of education items like the one below
@@ -145,7 +145,7 @@ The JSON spec is:
     "name": "The name that you want at the top of the resume",
     "versions": ["A list of the resume versions represented in this file"],
     "contact_info": [
-        "A list of contact info latex snippets like the one below that gounder the name",
+        "A list of contact info latex snippets like the one below that go under the name",
         {
             "data": "The contact info item you want included in at least one version",
             "versions": ["list of the versions this contact info should be included in"],
@@ -167,9 +167,9 @@ The JSON spec is:
             }
         ],
         "software_tools": [
-            "A list of software/tools like the one below you are familar with",
+            "A list of software/tools like the one below you are familiar with",
             {
-                "data": "The software/tool you are familar with",
+                "data": "The software/tool you are familiar with",
                 "versions": ["A list of the versions this software/tool should be included in"],
             }
         ]
