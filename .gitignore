@@ -6,3 +6,6 @@
 _.md
 output/*
 .venv
+
+# Ignore pyenv settings file
+.python-version
