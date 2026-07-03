@@ -59,10 +59,10 @@ if 'versions' not in data:
         outfile.write(content)
 
     # Compile latex file into appropriate folder
-    os.system("pdflatex -output-directory output\\compiled_results output\\raw_tex\\resume.tex")
+    os.system("pdflatex -output-directory output/compiled_results output/raw_tex/resume.tex")
 
     # Remove logfile
-    os.remove('output\\compiled_results\\resume.log')
+    os.remove('output/compiled_results/resume.log')
 
 # Handle Case Where Versions are Defined
 else:
