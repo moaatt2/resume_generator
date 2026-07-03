@@ -103,7 +103,7 @@
 
     \begin{{ "{" }}rSubsection{{ "}" }}{{ "{" }}{{ item["company"] }}{{ "}" }}{{ "{" }}{{ item["location"] }}{{ "}" }}{{ "{" }}{{ item["time"] }}{{ "}" }}{{ "{" }}{{ item["title"] }}{{ "}{}" }}
         {% for point in item["points"] %}
-        \item {{ point }}
+        \item {{ point | replace("$", "\$") }}
         {% endfor %}
     \end{{ "{" }}rSubsection{{ "}" }}
     
